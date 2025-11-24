@@ -1,0 +1,25 @@
+import logging
+import sys
+
+
+def setup_logger():
+  logger = logging.getLogger()
+  logger.setLevel(logging.INFO)
+
+  for handler in logger.handlers[:]:
+    logger.removeHandler(handler)
+
+  stdout_handler = logging.StreamHandler(sys.stdout)
+  stdout_handler.setLevel(logging.INFO)
+  stdout_handler.addFilter(lambda record: record.levelno < logging.ERROR)
+
+  stderr_handler = logging.StreamHandler(sys.stderr)
+  stderr_handler.setLevel(logging.ERROR)
+
+  formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
+
+  stdout_handler.setFormatter(formatter)
+  stderr_handler.setFormatter(formatter)
+
+  logger.addHandler(stdout_handler)
+  logger.addHandler(stderr_handler)

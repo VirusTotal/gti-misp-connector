@@ -20,7 +20,8 @@ This project automates the process of pulling Threat Intelligence from Google Th
     MISP_SSL=False
     ```
     Replace the placeholder values with your actual API keys and URLs.
-    `MISP_SSL` controls whether to use SSL verification when connecting to MISP (defaults to False).
+    *   `LIMIT`: Controls the number of messages fetched from GTI in a single API call. The recommended value is 10 and it can't be greater than 40.
+    *   `MISP_SSL`: Controls whether to use SSL verification when connecting to MISP (defaults to False).
 
 ## Running Locally
 

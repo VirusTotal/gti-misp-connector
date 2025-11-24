@@ -38,7 +38,7 @@ def get_dcc_id() -> str:
 
 
 def get_messages(dcc_id: str) -> list[dict[str, str]]:
-  logging.info('Getting messages from VT...')
+  logging.info('Getting messages from GTI...')
   response = requests.get(
       MISP_THREAT_INTEL_URL.format(dcc_id=dcc_id),
       params={'limit': LIMIT},
@@ -137,7 +137,7 @@ def fetch_data():
   sent_messages = 0
   i = 0
   while (messages := get_messages(dcc_id)):
-    logging.info('Length from VT: %s', len(messages))
+    logging.info('Length from GTI: %s', len(messages))
     misp_responses = []
     for message in messages:
       misp_response = send_to_misp(session, message)

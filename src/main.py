@@ -1,9 +1,9 @@
 import argparse
 import logging
 import requests
-import sys
 
 import api_client
+import logger_config
 import scheduler
 
 from _version import __version__
@@ -31,27 +31,25 @@ def check_for_updates():
 
 
 def main():
-  logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s', stream=sys.stdout)
+  logger_config.setup_logger()
+
   parser = argparse.ArgumentParser(description='MISP Connector')
-  parser.add_argument('--once', action='store_true', help='Run the data fetch job once.')
+  parser.add_argument('--once', action='store_true', help='Run the data fetch job once (default behavior).')
   parser.add_argument('--schedule', type=int, help='Run the data fetch job periodically every N seconds.')
 
   args = parser.parse_args()
 
   check_for_updates()
 
-  if args.once:
-    logging.info('Running job once...')
-    data = api_client.fetch_data()
-    logging.info('Messages to MISP: %s', data)
-  elif args.schedule:
+  if args.schedule:
     if args.schedule <= 0:
       logging.error('Error: --schedule interval must be a positive integer.')
       return
     scheduler.run_scheduler(args.schedule)
   else:
-    logging.info('Please specify a run mode: --once or --schedule <seconds>')
-    parser.print_help()
+    logging.info('Running job once...')
+    data = api_client.fetch_data()
+    logging.info('Messages to MISP: %s', data)
 
 
 if __name__ == '__main__':
