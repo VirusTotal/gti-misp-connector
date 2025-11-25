@@ -40,7 +40,7 @@ This project automates the process of pulling Threat Intelligence from Google Th
 3.  **Run the connector:**
     *   **Run once:**
         ```bash
-        python src/main.py --once
+        python src/main.py
         ```
     *   **Run periodically (e.g., every 60 seconds):**
         ```bash
@@ -53,10 +53,11 @@ This project automates the process of pulling Threat Intelligence from Google Th
     ```bash
     docker build --no-cache -t misp-connector .
     ```
+
 2.  **Run the Docker container:**
     *   **Run once:**
         ```bash
-        docker run --env-file .env misp-connector --once
+        docker run --env-file .env misp-connector
         ```
     *   **Run periodically (e.g., every 60 seconds):**
         ```bash
