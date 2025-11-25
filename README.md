@@ -2,6 +2,8 @@
 
 This project automates the process of pulling Threat Intelligence from Google Threat Intelligence and importing it into your MISP instance. It can be configured to run as a one-time import or on a periodic schedule to keep your MISP instance updated with the latest GTI data.
 
+Attention: Configure the connector in the [Google Threat Intelligence interface](https://www.virustotal.com/gui/technology-integrations/third-party-to-vt) prior to starting ingestion.
+
 ## Setup
 
 1.  **Clone the repository:**
